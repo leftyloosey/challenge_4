@@ -51,6 +51,10 @@ li button::before {
     content: counter(olCounter) ". ";
 }
 
+#timer {
+    visibility: hidden;
+}
+
 @media (max-width: 690px) {
     
 }

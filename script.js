@@ -1,8 +1,11 @@
+//get elements and query selectors and variables 
+
 var qButton1 = document.getElementById("question1")
 var qButton2 = document.getElementById("question2")
 var qButton3 = document.getElementById("question3")
 var qButton4 = document.getElementById("question4")
 
+var timerDisplay = document.getElementById("timer")
 var qListEl = document.getElementById("questionList")
 var startButton = document.getElementById("startButton")
 var questionText = document.getElementById("questionText")
@@ -11,13 +14,16 @@ var middle = document.getElementById("middle")
 var secondMiddle = document.getElementById("secondMiddle")
 var questionBody = document.getElementById("questionBody")
 
-bigIndex = 0
+var liTag = document.createElement("p")
 
-var rightAnswerButton = ""
+var bigIndex = 0
+timer = 60
 var rightAnswer = ""
 
 var questionArray = []
 qButtonArray = [qButton1, qButton2, qButton3, qButton4]
+
+// here be the raw question data
 
 var seoQuestion = [
     "What does SEO stand for?",
@@ -29,7 +35,7 @@ var seoQuestion = [
 
 var javaQuestion = [
     "Who developed javascript?",
-    "Grigory Rasputin",
+    "Grigori Rasputin",
     "Brandon Eich       ",
     "Old Man Peabody",
     "Pierre Gustave Toutant Beauregard"
@@ -38,7 +44,7 @@ var javaQuestion = [
 var oopQuestion = [
     "What does OOP stand for?",
     "Only Our Potatoes",
-    "Onward, or Perish!",
+    "Onward, Or Perish!",
     "Owls, Omens, Premonitions",
     "Object-oriented Programming       "
 ]
@@ -51,11 +57,45 @@ var loopQuestion = [
     "They are equally so       "
 ]
 
+var cssQuestion = [
+    "What does CSS stand for?",
+    "Certified Stamp Seller",
+    "Cranial Stop Serum",
+    "Cash So Soggy",
+    "Cascading Style Sheet"
+]
 
+// and all the functions here.
+
+function removeChild() {
+    questionText.removeChild(liTag)
+}
 
 function isRight(right) {
     return right.includes("       ")
 }
+
+function startTimer() {
+    timerDisplay.style.visibility = "visible"
+    timerDisplay.textContent = timer 
+    
+    function countDown() {
+        timer = timer-1
+        
+        timerDisplay.textContent = timer
+        if (timer <= 0 ) {
+            console.log("fail")
+            questionBody.appendChild(liTag)
+            liTag.textContent = "find a different career"
+            setTimeout(removeChild, 2000)
+            return
+        }
+    }
+    setInterval(countDown, 1000)
+
+   
+}   
+
 
 function appendQuestions(a) {
     
@@ -64,9 +104,8 @@ function appendQuestions(a) {
         qButtonArray[1].textContent = a[2]
         qButtonArray[2].textContent = a[3]
         qButtonArray[3].textContent = a[4]
-        
-
     }
+
     questionBody.textContent = a[0]
     questionList.style.display = "flex";
 
@@ -77,36 +116,57 @@ function appendQuestions(a) {
     console.log(rightAnswer)
     console.log(a)
     console.log(a.indexOf(rightAnswer))
-    goodindex = a.indexOf(rightAnswer)
-    console.log("good index" , goodindex)
+    goodIndex = a.indexOf(rightAnswer)
+    console.log("good index" , goodIndex)
     
     console.log(bigIndex)
-    qButtonArray[goodindex-1].addEventListener("click", throughQuestions)
-}
-var allQuestions = [seoQuestion, javaQuestion, oopQuestion, loopQuestion]
+
+    qButtonArray[0].removeEventListener("click", throughQuestions)
+    qButtonArray[1].removeEventListener("click", throughQuestions)
+    qButtonArray[2].removeEventListener("click", throughQuestions)
+    qButtonArray[3].removeEventListener("click", throughQuestions)
 
 
-function waitFor () {
-    console.log("wait")
+    qButtonArray[0].addEventListener("click", wrongQuestion)
+    qButtonArray[1].addEventListener("click", wrongQuestion)
+    qButtonArray[2].addEventListener("click", wrongQuestion)
+    qButtonArray[3].addEventListener("click", wrongQuestion)
+    
+    console.log([goodIndex-1])
+    qButtonArray[goodIndex-1].removeEventListener("click", wrongQuestion)
+    qButtonArray[goodIndex-1].addEventListener("click", throughQuestions)
    
+   
+}
+var allQuestions = [seoQuestion, javaQuestion, oopQuestion, loopQuestion, cssQuestion]
 
+function wrongQuestion() {
+    timer = timer - 10 
+    
+    liTag.textContent = " no. No. NO "
+    liTag.setAttribute("style", "font-weight: bold;")
+    questionText.appendChild(liTag)
+  
+    setTimeout(removeChild, 850)
 }
 
 function throughQuestions() {
     bigIndex++
     appendQuestions(allQuestions[bigIndex])
-    }
-
-
-function startListen(a, b) {
-    a.addEventListener("click", b)
 }
 
 function questionOne() {
     middle.style.visibility = "hidden"
     startButton.style.display = "none"
+    startTimer()
     appendQuestions(seoQuestion)
 }
+
+
+
+
+
+  
 
 startButton.addEventListener("click", questionOne)
 
