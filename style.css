@@ -1,0 +1,56 @@
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+#middle {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#secondMiddle {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#questionList {
+    display: hidden;
+    justify-content: center;
+    position: relative;
+    right: 8em;
+}
+#question {
+    background-color: lightgrey;
+    border-radius: 25%;
+    line-height: 1.5em;
+    margin-top: 0.5em;
+}
+
+#questionText {
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+    
+}
+
+ol {
+    list-style: none;
+    counter-reset: olCounter;
+}
+  
+li {
+    counter-increment: olCounter;
+}
+  
+li button::before {
+    content: counter(olCounter) ". ";
+}
+
+@media (max-width: 690px) {
+    
+}
