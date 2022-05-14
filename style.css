@@ -17,7 +17,7 @@
 }
 
 #questionList {
-    display: hidden;
+    visibility: hidden;
     justify-content: center;
     position: relative;
     right: 8em;
@@ -57,4 +57,13 @@ li button::before {
 
 @media (max-width: 690px) {
     
+}
+
+#scoreText {
+    color: black;
+}
+
+#hiscores {
+    
+    color: black;
 }
