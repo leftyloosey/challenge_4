@@ -16,4 +16,4 @@ If I had more time I would make it pretty in addition to making it work.
 
 ## Screen
 
-! [screen] (screen.png)
+! [screen](screen.png)
