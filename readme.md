@@ -8,7 +8,7 @@ I am still figuring out localStorage, but, alas, I am out of time for now. I wou
 It works for the most part, though. A fairly simple function that runs through an array of questions while a timer counts down. It was not fairly simple to write. I spent forever trying to make the indices of loops match up, etc. I like my little
 hack of using the hidden string of spaces to mark the correct answer.
 
-If I had more time I would make it pretty in addition to making it work. 
+If I had more time I would make it pretty in addition to making it work. The raw data for the eventual scoreboard is logged in the console, I just haven't made it display yet.
 
 ## Link
 
@@ -16,4 +16,4 @@ If I had more time I would make it pretty in addition to making it work.
 
 ## Screen
 
-! [screen](screen.png)
+![screen](screen.png)
